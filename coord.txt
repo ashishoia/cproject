@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Coordinate {
+    double latitude;
+    double longitude;
+    struct Coordinate* next;
+};
+
+void insert(struct Coordinate** head, double latitude, double longitude) {
+    struct Coordinate* newNode = (struct Coordinate*)malloc(sizeof(struct Coordinate));
+    newNode->latitude = latitude;
+    newNode->longitude = longitude;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Coordinate* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+void display(struct Coordinate* head) {
+    struct Coordinate* current = head;
+    while (current != NULL) {
+        printf("Latitude: %lf, Longitude: %lf\n", current->latitude, current->longitude);
+        current = current->next;
+    }
+}
+
+int main() {
+    struct Coordinate* head = NULL;
+
+    insert(&head, 40.7128, -74.0060);
+    insert(&head, 51.5074, -0.1278);
+    insert(&head, 35.6895, 139.6917);
+
+    display(head);
+
+    return 0;
+}
