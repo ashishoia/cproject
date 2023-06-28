@@ -43,4 +43,20 @@ void display(struct Node* front) {
     while (current != NULL) {
         printf("%d ", current->data);
         current = current->next;
-   
+   }
+}
+
+int main() {
+    struct Node* front = NULL;
+    struct Node* rear = NULL;
+
+    enqueue(&front, &rear, 10);
+    enqueue(&front, &rear, 20);
+    enqueue(&front, &rear, 30);
+
+    printf("Dequeued: %d\n", dequeue(&front, &rear));
+
+    display(front);
+
+    return 0;
+}
